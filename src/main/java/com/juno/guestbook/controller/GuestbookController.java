@@ -106,19 +106,15 @@ public class GuestbookController {
         log.info("post modify.........................................");
         log.info("dto: " + dto);
 
+        redirectAttributes.addAttribute("page",requestDTO.getPage());
+        redirectAttributes.addAttribute("type",requestDTO.getType());
+        redirectAttributes.addAttribute("keyword",requestDTO.getKeyword());
+        redirectAttributes.addAttribute("gno",dto.getGno());
+
         if (result.hasErrors()) {
-            redirectAttributes.addAttribute("gno",dto.getGno());
             return "redirect:/guestbook/modify";
         } else {
             service.modify(dto);
-
-            redirectAttributes.addAttribute("page",requestDTO.getPage());
-            redirectAttributes.addAttribute("type",requestDTO.getType());
-            redirectAttributes.addAttribute("keyword",requestDTO.getKeyword());
-
-            redirectAttributes.addAttribute("gno",dto.getGno());
-
-
             return "redirect:/guestbook/read";
         }
     }
